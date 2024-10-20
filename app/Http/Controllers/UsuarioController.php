@@ -30,7 +30,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $usuario = $this->usuarioService->guardar($request->all());
+        $usuario = $this->usuarioService->guardar($request->validated());
         return new UsuarioResource($usuario);
     }
 
@@ -48,7 +48,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        $usuario = $this->usuarioService->actualizar($usuario->id, $request->all());
+        $usuario = $this->usuarioService->actualizar($usuario->id, $request->validated());
         return new UsuarioResource($usuario);
     }
 

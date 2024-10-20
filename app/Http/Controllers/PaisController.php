@@ -30,7 +30,7 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        $pais = $this->paisService->guardar($request->all());
+        $pais = $this->paisService->guardar($request->validated());
         return new PaisResource($pais);
     }
 
@@ -48,7 +48,7 @@ class PaisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pais = $this->paisService->actualizar($id, $request->all());
+        $pais = $this->paisService->actualizar($id, $request->validated());
         return new PaisResource($pais);
     }
 

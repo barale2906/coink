@@ -29,7 +29,7 @@ class MunicipioController extends Controller
      */
     public function store(Request $request)
     {
-        $municipio = $this->municipioService->guardar($request->all());
+        $municipio = $this->municipioService->guardar($request->validated());
         return new MunicipioResource($municipio);
     }
 
@@ -47,7 +47,7 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, Municipio $municipio)
     {
-        $municipio = $this->municipioService->actualizar($municipio->id, $request->all());
+        $municipio = $this->municipioService->actualizar($municipio->id, $request->validated());
         return new MunicipioResource($municipio);
     }
 
