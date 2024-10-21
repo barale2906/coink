@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre')->comment('nombre completo del municipio');
 
             $table->unsignedBigInteger('departamento_id');
-            $table->foreign('departamento_id')->references('id')->on('departamentos');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
 
             $table->timestamps();
         });

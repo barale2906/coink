@@ -19,13 +19,13 @@ return new class extends Migration
             $table->longText('direccion')->comment('Dirección completa del usuario');
 
             $table->unsignedBigInteger('pais_id');
-            $table->foreign('pais_id')->references('id')->on('pais');
+            $table->foreign('pais_id')->references('id')->on('pais')->onDelete('cascade');
 
             $table->unsignedBigInteger('departamento_id');
-            $table->foreign('departamento_id')->references('id')->on('departamentos');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
 
             $table->unsignedBigInteger('municipio_id');
-            $table->foreign('municipio_id')->references('id')->on('municipios');
+            $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('cascade');
 
             $table->timestamps();
         });

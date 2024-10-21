@@ -17,7 +17,6 @@ class MunicipioResource extends JsonResource
         return [
                     'id' => $this->id,
                     'nombre' => $this->nombre,
-                    'departamento' => DepartamentoResource::collection($this->whenLoaded('departamento')),
                     'usuarios' => UsuarioResource::collection($this->whenLoaded('usuarios')),
                 ];
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuarioRequest extends FormRequest
+class MunicipioUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,17 @@ class UsuarioRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'nombre' => 'required|max:255',
-            'telefono' => 'required|max:25',
-            'direccion'=>'required',
+        $municipioId = $this->route('municipio') ? $this->route('municipio')->id : null;
 
-            'municipio_id' => 'required|exists:municipios,id', // Campo requerido y debe existir en la tabla municipios
+        return [
+            'nombre' => [
+                            'required',
+                            'string',
+                            'max:255',
+                            // Verifica que el nombre sea único en la tabla municipios
+                            'unique:municipios,nombre,' . $municipioId,
+                        ],
             'departamento_id' => 'required|exists:departamentos,id', // Campo requerido y debe existir en la tabla departamentos
-            'pais_id' => 'required|exists:pais,id', // Campo requerido y debe existir en la tabla pais
         ];
     }
 
@@ -38,12 +41,9 @@ class UsuarioRequest extends FormRequest
             'nombre.required' => 'El nombre del departamento es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de texto.',
             'nombre.max' => 'El nombre no puede exceder los 255 caracteres.',
-            'pais_id.required' => 'El país es obligatorio.',
-            'pais_id.exists' => 'El país seleccionado no es válido.',
-            'departamento_id.required' => 'El departamento es obligatorio.',
-            'departamento_id.exists' => 'El departamento seleccionado no es válido.',
-            'municipio_id.required' => 'El municipio es obligatorio.',
-            'municipio_id.exists' => 'El municipio seleccionado no es válido.',
+            'nombre.unique' => 'El nombre ya esta registrado en la base de datos',
+            'departamento_id.required' => 'El país es obligatorio.',
+            'departamento_id.exists' => 'El país seleccionado no es válido.',
         ];
     }
 }

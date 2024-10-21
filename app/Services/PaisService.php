@@ -9,12 +9,12 @@ class PaisService implements PaisInterface
 {
     public function obtenerTodos()
     {
-        return Pais::all();
+        return Pais::with('departamentos','usuarios')->get();
     }
 
     public function obtenerPorId($id)
     {
-        return Pais::findOrFail($id);
+        return Pais::with('departamentos','usuarios')->findOrFail($id);;
     }
 
     public function guardar(array $data)

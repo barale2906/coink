@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\UsuarioInterface;
+use App\Http\Requests\UsuarioRequest;
 use App\Http\Resources\UsuarioResource;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
         $usuario = $this->usuarioService->guardar($request->validated());
         return new UsuarioResource($usuario);
@@ -46,7 +47,7 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(UsuarioRequest $request, Usuario $usuario)
     {
         $usuario = $this->usuarioService->actualizar($usuario->id, $request->validated());
         return new UsuarioResource($usuario);

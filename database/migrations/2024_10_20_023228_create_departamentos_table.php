@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre')->comment('nombre completo del departamento');
 
             $table->unsignedBigInteger('pais_id');
-            $table->foreign('pais_id')->references('id')->on('pais');
+            $table->foreign('pais_id')->references('id')->on('pais')->onDelete('cascade');
 
             $table->timestamps();
         });

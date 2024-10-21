@@ -9,12 +9,12 @@ class MunicipioService implements MunicipioInterface
 {
     public function obtenerTodos()
     {
-        return Municipio::all();
+        return Municipio::with('usuarios')->get();
     }
 
     public function obtenerPorId($id)
     {
-        return Municipio::findOrFail($id);
+        return Municipio::with('usuarios')->findOrFail($id);
     }
 
     public function guardar(array $data)

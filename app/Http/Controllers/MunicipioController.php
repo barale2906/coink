@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\MunicipioInterface;
+use App\Http\Requests\MunicipioRequest;
+use App\Http\Requests\MunicipioUpdateRequest;
 use App\Http\Resources\MunicipioResource;
 use App\Models\Municipio;
 use Illuminate\Http\Request;
@@ -27,7 +29,7 @@ class MunicipioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MunicipioRequest $request)
     {
         $municipio = $this->municipioService->guardar($request->validated());
         return new MunicipioResource($municipio);
@@ -45,7 +47,7 @@ class MunicipioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Municipio $municipio)
+    public function update(MunicipioUpdateRequest $request, Municipio $municipio)
     {
         $municipio = $this->municipioService->actualizar($municipio->id, $request->validated());
         return new MunicipioResource($municipio);

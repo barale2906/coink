@@ -9,12 +9,12 @@ class UsuarioService implements UsuarioInterface
 {
     public function obtenerTodos()
     {
-        return Usuario::all();
+        return Usuario::with('municipio','departamento','pais')->get();
     }
 
     public function obtenerPorId($id)
     {
-        return Usuario::findOrFail($id);
+        return Usuario::with('municipio','departamento','pais')->findOrFail($id);
     }
 
     public function guardar(array $data)

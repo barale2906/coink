@@ -18,7 +18,7 @@ class DepartamentoResource extends JsonResource
                     'id' => $this->id,
                     'nombre' => $this->nombre,
                     'pais_id'=> $this->pais_id,
-                    'municipios' => PaisResource::collection($this->whenLoaded('municipios')),
+                    'municipios' => MunicipioResource::collection($this->whenLoaded('municipios')),
                     'usuarios' => UsuarioResource::collection($this->whenLoaded('usuarios')),
                 ];
     }

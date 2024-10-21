@@ -11,7 +11,7 @@ class MunicipioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,17 +21,11 @@ class MunicipioRequest extends FormRequest
      */
     public function rules(): array
     {
-        $municipioId = $this->route('municipio') ? $this->route('municipio')->id : null;
 
         return [
-            'nombre' => [
-                            'required',
-                            'string',
-                            'max:255',
-                            // Verifica que el nombre sea único en la tabla municipios
-                            'unique:municipios,nombre,' . $municipioId,
-                        ],
+            'nombre'  => 'required|string|unique:departamentos,nombre',
             'departamento_id' => 'required|exists:departamentos,id', // Campo requerido y debe existir en la tabla departamentos
+
         ];
     }
 
