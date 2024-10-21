@@ -9,12 +9,12 @@ class DepartamentoService implements DepartamentoInterface
 {
     public function obtenerTodos()
     {
-        return Departamento::all();
+        return Departamento::with('municipios','usuarios')->get();
     }
 
     public function obtenerPorId($id)
     {
-        return Departamento::findOrFail($id);
+        return Departamento::with('municipios','usuarios')->findOrFail($id);
     }
 
     public function guardar(array $data)

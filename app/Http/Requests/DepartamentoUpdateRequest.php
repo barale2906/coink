@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartamentoRequest extends FormRequest
+class DepartamentoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,17 @@ class DepartamentoRequest extends FormRequest
      */
     public function rules(): array
     {
-        //$departamentoId = $this->route('departamento') ? $this->route('departamento')->id : null;
+        $departamentoId = $this->route('departamento') ? $this->route('departamento')->id : null;
 
         return [
+            'nombre' => [
+                            'required',
+                            'string',
+                            'max:255',
+                            // Verifica que el nombre sea único en la tabla departamentos
+                            'unique:departamentos,nombre,' . $departamentoId,
+                        ],
             'pais_id' => 'required|exists:pais,id', // Campo requerido y debe existir en la tabla pais
-            'nombre'  => 'required|string|unique:departamentos,nombre'
         ];
     }
 

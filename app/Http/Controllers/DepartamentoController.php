@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\DepartamentoInterface;
 use App\Http\Requests\DepartamentoRequest;
+use App\Http\Requests\DepartamentoUpdateRequest;
 use App\Http\Resources\DepartamentoResource;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
@@ -47,7 +48,7 @@ class DepartamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(DepartamentoRequest $request, Departamento $departamento)
+    public function update(DepartamentoUpdateRequest $request, Departamento $departamento)
     {
         $departamento = $this->departamentoService->actualizar($departamento->id, $request->validated());
         return new DepartamentoResource($departamento);
